@@ -88,7 +88,9 @@ button:hover {
   background: #5c3514;
 }
 
-#quiz { display: none; }
+#quiz {
+  display: none;
+}
 
 #splash {
   text-align: center;
@@ -100,20 +102,18 @@ button:hover {
 <body>
 
 <header>
-data:image/png;src="base64,iVBORw0KGgoAAAANSUhEUgAA..."
+  bell.png
   <h1>Find the Buried Bell Shell</h1>
 </header>
 
 <div class="container">
 
-  <!-- SPLASH SCREEN -->
   <div id="splash">
     <p><strong>Legend tells of a bell shell buried long ago.</strong></p>
     <p>Solve the mathematical trials to reveal where it lies.</p>
     <button onclick="startGame()">START</button>
   </div>
 
-  <!-- QUIZ -->
   <div id="quiz">
     <div class="timer">
       Time Remaining: <span id="time">30:00</span>
@@ -124,7 +124,6 @@ data:image/png;src="base64,iVBORw0KGgoAAAANSUhEUgAA..."
     </div>
 
     <div class="progress" id="progress"></div>
-
     <div class="problem" id="problem"></div>
   </div>
 

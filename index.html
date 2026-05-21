@@ -176,17 +176,24 @@ function showProblem() {
 
 function checkAnswer() {
   const input = document.getElementById("answer").value.replace(/\s+/g, "");
+
   if (input === answers[current]) {
+
+    // Reveal ONLY the current letter
     revealed[current] = messageText[current];
     updateMessage();
     progressDiv.children[current].className = "done";
+
     current++;
 
-    if (current === 14) {
+    // Only finish AFTER problem 14
+    if (current === problems.length) {
       alert("☠️ The map is complete. DIG AT THE CORNER!");
       return;
     }
+
     showProblem();
+
   } else {
     document.getElementById("feedback").innerText = " Try again.";
   }

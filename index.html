@@ -103,10 +103,7 @@ button:hover {
 Time Remaining: <span id="time">30:00</span>
 </div>
 
-<div class="message" id="message">
-_ _ _ &nbsp; _ _ &nbsp; _ _ _ &nbsp; _ _ _ _ _ _
-</div>
-
+<div class="message" id="message"></div>
 <div class="progress" id="progress"></div>
 <div class="problem" id="problem"></div>
 </div>
@@ -114,12 +111,8 @@ _ _ _ &nbsp; _ _ &nbsp; _ _ _ &nbsp; _ _ _ _ _ _
 </div>
 
 <script>
-const messageText = "DIG AT THE CORNER";
-let revealed = Array.from(messageText).map(c => c === " " ? " " : "_");
-
-let current = 0;
-let seconds = 1800;
-let timerStarted = false;
+const revealLetters = ["D","I","G","A","T","T","H","E","C","O","R","N","E","R"];
+let revealed = Array(revealLetters.length).fill("_");
 
 const problems = [
  "Solve: 4x = 28",
@@ -143,16 +136,31 @@ const answers = [
  "12","4","36","1000","20","2"
 ];
 
+let current = 0;
+let seconds = 1800;
+let timerStarted = false;
+
 const progressDiv = document.getElementById("progress");
-for (let i = 0; i < problems.length; i++) {
+for (let i = 0; i < revealLetters.length; i++) {
   progressDiv.appendChild(document.createElement("div"));
 }
 
 function updateMessage() {
-  document.getElementById("message").innerText = revealed.join(" ");
+  const display =
+    revealed.slice(0,3).join(" ") + "   " +
+    revealed.slice(3,5).join(" ") + "   " +
+    revealed.slice(5,8).join(" ") + "   " +
+    revealed.slice(8).join(" ");
+  document.getElementById("message").innerText = display;
 }
 
 function showProblem() {
+  if (current >= problems.length) {
+    document.getElementById("problem").innerHTML =
+      "<p><strong>The message is complete.</strong></p>";
+    return;
+  }
+
   const p = document.getElementById("problem");
   p.innerHTML =
     "<p><strong>Problem " + (current + 1) + ":</strong> " + problems[current] + "</p>" +
@@ -161,19 +169,13 @@ function showProblem() {
 }
 
 function checkAnswer() {
-  const input = document.getElementById("answer").value.replace(/\s+/g, "");
+  const input = document.getElementById("answer").value.replace(/\s+/g,"");
 
   if (input === answers[current]) {
-    revealed[current] = messageText[current];
+    revealed[current] = revealLetters[current];
     updateMessage();
     progressDiv.children[current].className = "done";
     current++;
-
-    if (current === problems.length) {
-      alert("☠️ The map is complete. DIG AT THE CORNER!");
-      return;
-    }
-
     showProblem();
   } else {
     document.getElementById("feedback").innerText = " Try again.";
@@ -183,6 +185,7 @@ function checkAnswer() {
 function startGame() {
   document.getElementById("splash").style.display = "none";
   document.getElementById("quiz").style.display = "block";
+  updateMessage();
   showProblem();
 
   if (!timerStarted) {
@@ -197,8 +200,6 @@ function startGame() {
     }, 1000);
   }
 }
-
-updateMessage();
 </script>
 
 </body>

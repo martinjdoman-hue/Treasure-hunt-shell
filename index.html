@@ -88,9 +88,7 @@ button:hover {
   background: #5c3514;
 }
 
-#quiz {
-  display: none;
-}
+#quiz { display: none; }
 
 #splash {
   text-align: center;
@@ -102,30 +100,30 @@ button:hover {
 <body>
 
 <header>
-<img src="bell.png" alt="Bell Shell">  
-<h1>Find the Buried Bell Shell</h1>
+  <img src="bell.png" alt="Bell Shell">
+  <h1>Find the Buried Bell Shell</h1>
 </header>
 
 <div class="container">
 
-  <div id="splash">
-    <p><strong>Legend tells of a bell shell buried long ago.</strong></p>
-    <p>Solve the mathematical trials to reveal where it lies.</p>
-    <button onclick="startGame()">START</button>
-  </div>
+<div id="splash">
+<p><strong>Legend tells of a bell shell buried long ago.</strong></p>
+<p>Solve the mathematical trials to reveal where it lies.</p>
+<button onclick="startGame()">START</button>
+</div>
 
-  <div id="quiz">
-    <div class="timer">
-      Time Remaining: <span id="time">30:00</span>
-    </div>
+<div id="quiz">
+<div class="timer">
+Time Remaining: <span id="time">30:00</span>
+</div>
 
-    <div class="message" id="message">
-      _ _ _ &nbsp; _ _ &nbsp; _ _ _ &nbsp; _ _ _ _ _ _
-    </div>
+<div class="message" id="message">
+_ _ _ &nbsp; _ _ &nbsp; _ _ _ &nbsp; _ _ _ _ _ _
+</div>
 
-    <div class="progress" id="progress"></div>
-    <div class="problem" id="problem"></div>
-  </div>
+<div class="progress" id="progress"></div>
+<div class="problem" id="problem"></div>
+</div>
 
 </div>
 
@@ -138,25 +136,25 @@ let seconds = 1800;
 let timerStarted = false;
 
 const problems = [
-  "3x + 7 = 25. Solve for x.",
-  "Factor: x² − 9",
-  "If f(x)=2x² and g(x)=x−1, find f(g(3))",
-  "Solve: 2ˣ = 16",
-  "Right triangle legs 9 and 12. Hypotenuse?",
-  "Simplify: (x³y²)(x²y⁴)",
-  "Solve |2x−5| = 9 (positive)",
-  "If sinθ = 1/2 (0 < θ < π), find θ in degrees",
-  "Find d/dx of x³eˣ",
-  "∫₀¹ 3x² dx",
-  "aₙ = 2n² − n. Find a₅",
-  "Solve log₁₀(x) = 2.5 (2 decimals)",
-  "lim(x→0) sinx/x",
-  "How many outcomes flipping 5 fair coins?"
+ "Solve: 4x = 28",
+ "Solve: x^2 = 49 (positive solution)",
+ "Evaluate: 3(5 + 2)",
+ "Solve: 2^x = 32",
+ "Find the hypotenuse of a triangle with legs 6 and 8",
+ "What is 5! (factorial)?",
+ "Solve: |3x − 9| = 0",
+ "If sin(x) = 1/2, what is x in degrees (acute angle)?",
+ "Derivative: if f(x)=x^3, find f'(2)",
+ "Evaluate: integral from 0 to 2 of 2x dx",
+ "Find the 6th term: a_n = n^2",
+ "Solve: log10(x) = 3",
+ "Find the limit: sin(x)/x as x → 0",
+ "How many subsets does a set with 4 elements have?"
 ];
 
 const answers = [
-  "6","(x-3)(x+3)","8","4","15","x^5y^6","7","30",
-  "x^3e^x+3x^2e^x","1","45","316.23","1","32"
+ "7","7","21","5","10","120","3","30",
+ "12","4","36","1000","1","16"
 ];
 
 const progressDiv = document.getElementById("progress");
@@ -178,7 +176,7 @@ function showProblem() {
 
 function checkAnswer() {
   const input = document.getElementById("answer").value.replace(/\s+/g, "");
-  if (input === answers[current].replace(/\s+/g, "")) {
+  if (input === answers[current]) {
     revealed[current] = messageText[current];
     updateMessage();
     progressDiv.children[current].className = "done";

@@ -11,25 +11,21 @@ body {
   background: #f2e4c4;
   color: #3b2a1a;
 }
-
 header {
   text-align: center;
   background: #d2b48c;
   border-bottom: 6px solid #7a4a1d;
   padding: 30px;
 }
-
 header img {
   max-width: 180px;
   margin-bottom: 10px;
 }
-
 h1 {
   font-size: 44px;
   letter-spacing: 2px;
   margin: 10px 0;
 }
-
 .container {
   max-width: 900px;
   margin: 40px auto;
@@ -38,7 +34,6 @@ h1 {
   box-shadow: 0 0 20px rgba(0,0,0,0.35);
   padding: 40px;
 }
-
 .message {
   text-align: center;
   font-size: 28px;
@@ -46,34 +41,28 @@ h1 {
   margin-bottom: 20px;
   font-weight: bold;
 }
-
 .progress {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
 }
-
 .progress div {
   width: 6%;
   height: 16px;
   background: #cbb68e;
   border: 1px solid #7a4a1d;
 }
-
 .progress .done {
   background: #7a4a1d;
 }
-
 .timer {
   text-align: center;
   font-size: 18px;
   margin-bottom: 20px;
 }
-
 .problem {
   font-size: 18px;
 }
-
 button {
   background: #7a4a1d;
   color: white;
@@ -83,13 +72,10 @@ button {
   cursor: pointer;
   font-weight: bold;
 }
-
 button:hover {
   background: #5c3514;
 }
-
 #quiz { display: none; }
-
 #splash {
   text-align: center;
   padding: 80px 20px;
@@ -143,22 +129,22 @@ const problems = [
  "Find the hypotenuse of a triangle with legs 6 and 8",
  "What is 5! (factorial)?",
  "Solve: |3x − 9| = 0",
- "If sin(x) = 1/2, what is x in degrees (acute angle)?",
+ "If sin(x) = 1/2, what is x in degrees?",
  "Derivative: if f(x)=x^3, find f'(2)",
  "Evaluate: integral from 0 to 2 of 2x dx",
  "Find the 6th term: a_n = n^2",
  "Solve: log10(x) = 3",
- "Find the limit: sin(x)/x as x → 0",
- "How many subsets does a set with 4 elements have?"
+ "If f(x)=2x^2−3x, find f(4)",
+ "How many solutions does x^2−5x+6=0 have?"
 ];
 
 const answers = [
  "7","7","21","5","10","120","3","30",
- "12","4","36","1000","1","16"
+ "12","4","36","1000","20","2"
 ];
 
 const progressDiv = document.getElementById("progress");
-for (let i = 0; i < 14; i++) {
+for (let i = 0; i < problems.length; i++) {
   progressDiv.appendChild(document.createElement("div"));
 }
 
@@ -178,22 +164,17 @@ function checkAnswer() {
   const input = document.getElementById("answer").value.replace(/\s+/g, "");
 
   if (input === answers[current]) {
-
-    // Reveal ONLY the current letter
     revealed[current] = messageText[current];
     updateMessage();
     progressDiv.children[current].className = "done";
-
     current++;
 
-    // Only finish AFTER problem 14
     if (current === problems.length) {
       alert("☠️ The map is complete. DIG AT THE CORNER!");
       return;
     }
 
     showProblem();
-
   } else {
     document.getElementById("feedback").innerText = " Try again.";
   }
